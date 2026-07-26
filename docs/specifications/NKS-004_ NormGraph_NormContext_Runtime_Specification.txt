@@ -1,0 +1,167 @@
+### NKS-004: NormGraph, NormContext и Runtime Specification
+
+```markdown
+# NKS-004
+# NormGraph, NormContext and Runtime Specification
+
+**Document ID:** NKS-004  
+**Title:** NormGraph, NormContext and Runtime Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 12 июля 2026  
+**Category:** Core Architecture  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution (обязательно)  
+- **NKS-001** Event System Specification (обязательно)  
+- **NKS-002** NormFactory Specification  
+- **NKS-003** Inference Engine Specification  
+- Научная монография (Главы 11–14)
+
+---
+
+## 1. Преамбула
+
+Настоящий документ определяет три ключевые компонента ядра NormOS в соответствии с **NKS-000** (Конституцией) и предыдущими спецификациями.
+
+---
+
+## 2. NormGraph — Нормативное пространство
+
+### 2.1. Назначение
+
+NormGraph — это **топологическая модель** всей нормативной реальности.  
+Он представляет нормативное пространство как граф, где:
+- Узлы — сущности (`NormGene`, `NormFact`, `NormState`, `Agent` и т.д.)
+- Рёбра — нормативные отношения и переходы.
+
+### 2.2. Требования (MUST)
+
+- Динамический ориентированный мультиграф.
+- Поддержка операций: Retrieval, Path finding, Collision detection, Simulation.
+- Полная интеграция с Event System — любое изменение отражается через события.
+- Воспроизводимость состояния графа через события.
+
+### 2.3. Основные типы связей
+
+- `Enables`, `Prohibits`, `Overrides`
+- `DependsOn`, `ConsequenceOf`
+- `References`, `Delegates`
+
+---
+
+## 3. NormContext — Нормативный контекст
+
+### 3.1. Назначение
+
+NormContext — **формализованная модель ситуации**, в которой происходит нормативный вывод.
+
+### 3.2. Структура (минимальная)
+
+```python
+class NormContext(BaseModel):
+    id: UUID
+    timestamp: datetime
+    agents: List[AgentState]
+    active_norms: List[NormGeneRef]
+    facts: List[NormFactRef]
+    time_scope: TimeInterval
+    spatial_scope: SpatialScope
+    roles: Dict[str, List[str]]
+    history: List[EventRef]          # ссылки на предыдущие события
+    metadata: Dict[str, Any]
+```
+
+### 3.3. Требования
+
+- **MUST** использоваться в каждом нормативном выводе (NKS-003).
+- **MUST** быть immutable после создания.
+- Создаётся и обновляется только через NormFactory / события.
+
+---
+
+## 4. Runtime (NormRuntime) — Исполнительная среда
+
+### 4.1. Назначение
+
+NormRuntime — исполнительная среда, в которой:
+- Применяются принятые `NormDecision`.
+- Изменяются состояния системы (`StateChanged`).
+- Мониторится compliance.
+- Выполняются долгоживущие процессы.
+
+### 4.2. Основные функции
+
+- Исполнение решений Inference Engine.
+- Управление жизненным циклом нормативных переходов.
+- Мониторинг и реакция на события в реальном времени.
+- Поддержка цифровых двойников нормативных ситуаций.
+
+### 4.3. Требования (MUST)
+
+- Работает исключительно через Event Bus.
+- Все изменения состояния публикуются как события (`StateChanged`).
+- Поддержка Replay (восстановление состояния).
+- Высокая наблюдаемость (метрики, логи, trace).
+
+---
+
+## 5. Взаимосвязь компонентов
+
+```text
+NormFactory → NormGene / NormFact → NormGraph
+NormQuery + NormFact + NormContext → Inference Engine → NormDecision
+NormDecision → Runtime → StateChanged (событие)
+Все изменения → Event Store (NKS-001)
+```
+
+---
+
+## 6. Архитектурные императивы (NKS-000)
+
+- **Event-Driven First** — все взаимодействия через события.
+- **Immutability** и **Reproducibility** — обязательны для Graph, Context и Runtime.
+- **Loose Coupling** — NormGraph, NormContext и Runtime независимы друг от друга, кроме событий.
+
+---
+
+## 7. Требования к MVP
+
+**MUST в MVP:**
+1. Базовая реализация NormGraph (NetworkX / Neo4j).
+2. Простая модель NormContext.
+3. Минимальный NormRuntime, реагирующий на `DecisionGenerated`.
+4. Полная интеграция с Event System.
+5. Поддержка Replay для базовых сценариев.
+
+---
+
+## 8. События (NKS-001)
+
+- `GraphUpdated`
+- `ContextCreated`
+- `ContextUpdated`
+- `StateChanged`
+- `RuntimeExecuted`
+
+---
+
+## 9. Тестируемость
+
+Все требования **MUST** иметь тесты, включая сценарии воспроизводимости состояния системы из событий.
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes |
+|---------|------------|--------|
+| 0.1     | 12.07.2026 | Первая версия |
+
+---
+
+Документ завершён.
+
+---
+

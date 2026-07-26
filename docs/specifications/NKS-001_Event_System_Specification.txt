@@ -1,0 +1,168 @@
+### NKS-001: Event System Specification
+
+```markdown
+# NKS-001
+# Event System Specification
+
+**Document ID:** NKS-001  
+**Title:** Event System Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 12 июля 2026  
+**Category:** Core Architecture  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution (обязательно)  
+- Научная монография «Нормативно-формализованная лингвистика» (Глава 5 — Нормативный переход)
+
+---
+
+## 1. Преамбула
+
+В соответствии со **Статьёй 4** и **Статьёй 7** Конституции (NKS-000) настоящий документ определяет архитектуру и требования к **Event System** — центральной подсистеме ядра NormOS.
+
+Event System является **первичной вычислительной средой** NormOS. Все остальные подсистемы (Inference Engine, NormFactory, NormGraph, Runtime и т.д.) работают как подписчики на события.
+
+---
+
+## 2. Назначение
+
+Event System обеспечивает:
+- Представление нормативной реальности как последовательности дискретных **NormEvent**.
+- Гарантированную **воспроизводимость** состояния системы (в соответствии со **Статьёй 4** Конституции).
+- Слабую связанность модулей через событийную архитектуру (**Event-Driven First**).
+- Полную историю нормативной реальности (Event Log / Event Store).
+
+**Event** — это атомарная единица вычислений в NormOS.
+
+---
+
+## 3. Архитектурные императивы (из NKS-000)
+
+Следующие требования **MUST** выполняться:
+
+1. **Immutability** — Опубликованное событие никогда не изменяется.
+2. **Reproducibility** — Состояние системы полностью воспроизводимо путём Replay последовательности событий.
+3. **Event-Driven First** — Прямые вызовы методов между модулями ядра **MUST NOT** использоваться.
+4. **Single Source of Truth** — События являются единственным источником изменений состояния.
+5. **Loose Coupling** — Модули общаются только через Event Bus.
+
+---
+
+## 4. Определение NormEvent
+
+**NormEvent** — неизменяемая запись о факте возникновения нормативно значимого события.
+
+### Структура (минимальная версия 0.1)
+
+```python
+class NormEvent(BaseModel):
+    id: UUID                    # уникальный идентификатор
+    type: str                   # например: NormFactCreated, InferenceRequested
+    timestamp: datetime         # время возникновения
+    source: str                 # кто создал событие (User, NormFactory, InferenceEngine и т.д.)
+    payload: Dict[str, Any]     # данные события
+    metadata: Dict[str, Any]    # версия, correlation_id, priority и т.д.
+    trace: List[Dict]           # цепочка происхождения (для отладки)
+    correlation_id: Optional[UUID] = None
+```
+
+**Требования к NormEvent (MUST):**
+- Неизменяемость после публикации.
+- Наличие `type` из контролируемого словаря.
+- Наличие `timestamp` и `source`.
+
+---
+
+## 5. Основные типы событий (v0.1)
+
+### System Events
+- `SystemStarted`
+- `SystemStopped`
+- `ModuleRegistered`
+
+### Normative Events
+- `NormFactCreated`
+- `NormFactUpdated`
+- `NormGeneCreated`
+- `NormGeneUpdated`
+
+### Inference Events
+- `InferenceRequested`
+- `TransitionMatched`
+- `TransitionRejected`
+- `DecisionGenerated`
+
+### Runtime & Audit Events
+- `StateChanged`
+- `ErrorOccurred`
+- `EventArchived`
+
+Этот список **может** расширяться только через NIP.
+
+---
+
+## 6. Компоненты Event System
+
+| Компонент       | Обязанности | Статус в MVP |
+|-----------------|-------------|--------------|
+| **Event Bus**   | Publish, Subscribe, Dispatch | Обязателен |
+| **Event Store** | Append-only хранение событий | Обязателен |
+| **Dispatcher**  | Маршрутизация событий подписчикам | Обязателен |
+| **Replay**      | Воспроизведение последовательности событий | Обязателен |
+| **Event Log**   | Постоянный журнал | Обязателен |
+
+---
+
+## 7. Интерфейс Event Bus (контракт)
+
+```python
+class EventBus(ABC):
+    def publish(self, event: NormEvent) -> None: ...
+    def subscribe(self, event_type: str, handler: Callable) -> None: ...
+    def unsubscribe(self, handler) -> None: ...
+    def replay(self, from_id: Optional[UUID] = None) -> None: ...
+```
+
+**MUST NOT** содержать бизнес-логики.
+
+---
+
+## 8. Жизненный цикл события
+
+```text
+Create → Validate → Publish → Queue → Dispatch → Process → Archive
+```
+
+Все этапы **MUST** фиксироваться (через события или trace).
+
+---
+
+## 9. Требования к реализации (MVP)
+
+1. In-memory Event Bus + SQLite/PostgreSQL Event Store.
+2. Поддержка Replay с нуля.
+3. Все модули ядра **должны** регистрировать свои обработчики при старте.
+4. Полная трассируемость (соответствует **Статье 11** Конституции).
+5. Каждое требование должно иметь тесты (**NTS-001**).
+
+---
+
+## 10. Соответствие Конституции (NKS-000)
+
+- Соответствует **Event-Driven First** и **Reproducibility**.
+- Обеспечивает **Loose Coupling**.
+- Является основой для всех остальных модулей.
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes                          |
+|---------|------------|----------------------------------|
+| 0.1     | 12.07.2026 | Первая черновая версия           |
+
+---
+
+Готово.

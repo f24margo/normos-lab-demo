@@ -1,0 +1,126 @@
+### NKS-009: CLI & API Layer Specification
+
+```markdown
+# NKS-009
+# CLI & API Layer Specification
+
+**Document ID:** NKS-009  
+**Title:** CLI & API Layer Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 13 июля 2026  
+**Category:** Interface Layer  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution  
+- **NKS-001** Event System  
+- **NKS-008** Package System  
+
+---
+
+## 1. Преамбула
+
+Настоящий документ определяет интерфейсы взаимодействия человека и внешних систем с NormOS.
+
+CLI — основной инструмент для лабораторных исследований и разработки.  
+API — основа для будущих приложений (веб, мобильные, интеграции).
+
+---
+
+## 2. Назначение
+
+- Обеспечить удобный доступ к возможностям ядра.
+- Сделать систему понятной для исследователей, разработчиков и пользователей.
+- Поддерживать принцип **Explainability** на уровне интерфейсов.
+
+---
+
+## 3. Архитектурные императивы
+
+- **Event-Driven** — все команды и запросы преобразуются в события.
+- **Specification-First** — CLI и API строго следуют NKS-документам.
+- **Consistency** — единый стиль команд и ответов.
+- **Security** — все действия проходят проверку прав (NKS-006).
+
+---
+
+## 4. CLI (Command Line Interface)
+
+**Основные команды (MVP):**
+
+```bash
+normos --help
+
+normos system start
+normos system status
+
+normos events list [--type NormFactCreated]
+normos events replay --from-id <uuid>
+
+normos infer "Чи можна прийняти рішення?" --context "кворум=True"
+
+normos package list
+normos package install local-self-government
+
+normos metrics alignment --test-set golden
+```
+
+---
+
+## 5. API (Application Programming Interface)
+
+**REST / Async API (будущая версия)**
+
+- `POST /api/infer` — нормативный вывод
+- `GET /api/events` — история событий
+- `POST /api/normgene` — загрузка новой нормы
+- `GET /api/graph` — состояние NormGraph
+
+Все запросы преобразуются во внутренние события.
+
+---
+
+## 6. Требования к MVP
+
+**MUST:**
+1. Работоспособный CLI на базе `typer` или `click`.
+2. Команды: `infer`, `events`, `system`, `metrics`.
+3. Вывод с форматированием (rich).
+4. Интеграция с Event Bus.
+
+**SHOULD:**
+- Интерактивный режим (`normos shell`).
+- Экспорт результатов в JSON / Markdown.
+
+---
+
+## 7. Пример реализации CLI (MVP)
+
+```python
+# cli/main.py
+import typer
+from rich.console import Console
+
+app = typer.Typer()
+console = Console()
+
+@app.command()
+def infer(query: str):
+    """Выполнить нормативный вывод"""
+    # ... вызов Inference Engine
+    console.print("[green]Вердикт: Дозволено (PERM)[/green]")
+```
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes |
+|---------|------------|--------|
+| 0.1     | 13.07.2026 | Первая версия |
+
+---
+
+---
+

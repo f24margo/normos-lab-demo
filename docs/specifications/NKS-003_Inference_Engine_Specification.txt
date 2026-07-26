@@ -1,0 +1,167 @@
+### NKS-003: Inference Engine Specification
+
+```markdown
+# NKS-003
+# Inference Engine Specification
+
+**Document ID:** NKS-003  
+**Title:** Inference Engine Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 12 июля 2026  
+**Category:** Core Architecture  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution (обязательно)  
+- **NKS-001** Event System Specification (обязательно)  
+- **NKS-002** NormFactory Specification (обязательно)  
+- Научная монография (Глава 13 — Нормативный вывод)
+
+---
+
+## 1. Преамбула
+
+В соответствии со **Статьями 3, 4 и 7** Конституции (NKS-000) настоящий документ определяет требования к **Inference Engine** — подсистеме, отвечающей за нормативный вывод (Normative Inference) в NormOS.
+
+Inference Engine является **операционным сердцем** нормативного рассуждения.
+
+---
+
+## 2. Назначение
+
+Inference Engine выполняет:
+- Поиск релевантных `NormGene` по запросу и контексту.
+- Сопоставление `NormGene`, `NormFact`, `NormQuery` и `NormContext`.
+- Вычисление нормативных переходов (`NormTransition`).
+- Генерацию `NormDecision` с полным обоснованием (trace).
+- Оценку качества вывода (Normative Alignment).
+
+Результатом работы является **воспроизводимое, объяснимое и проверяемое** нормативное решение.
+
+---
+
+## 3. Архитектурные императивы (NKS-000)
+
+- **Event-Driven First** — Engine **не** вызывает другие модули напрямую. Всё через события.
+- **Reproducibility** — При одинаковых входных данных и контексте результат **MUST** быть идентичным.
+- **Explainability** — Каждое решение **MUST** сопровождаться полным trace.
+- **Specification-First** — Реализация строго следует настоящему документу.
+
+---
+
+## 4. Основной процесс нормативного вывода
+
+```text
+InferenceRequested
+    ↓
+1. Retrieval (поиск релевантных NormGene)
+    ↓
+2. Context Filtering
+    ↓
+3. Deontic Matching (модальности)
+    ↓
+4. Collision Resolution (коллизии, приоритеты)
+    ↓
+5. Transition Calculation
+    ↓
+6. Validation
+    ↓
+7. DecisionGenerated + trace
+```
+
+---
+
+## 5. Входные и выходные сущности
+
+**Вход:**
+- `NormQuery` (запрос / намерение)
+- `NormFact` (факт)
+- `NormContext` (контекст)
+
+**Выход:**
+- `NormDecision`
+- `NormTransition` (один или несколько)
+- Полный trace + метрики (Soundness, Alignment и т.д.)
+
+---
+
+## 6. Обязательные события (NKS-001)
+
+- `InferenceRequested`
+- `TransitionMatched`
+- `TransitionRejected`
+- `CollisionDetected`
+- `DecisionGenerated`
+- `DecisionApproved` / `DecisionRejected`
+
+---
+
+## 7. Компоненты Inference Engine
+
+| Компонент                  | Назначение                              | Статус в MVP |
+|---------------------------|-----------------------------------------|--------------|
+| Retriever                 | Поиск релевантных норм (NormGraph)     | Обязателен |
+| ContextFilter             | Фильтрация по NormContext              | Обязателен |
+| DeonticMatcher            | Обработка модальностей                 | Обязателен |
+| CollisionResolver         | Разрешение конфликтов                  | Обязателен |
+| TransitionCalculator      | Вычисление переходов                   | Обязателен |
+| Validator                 | Проверка корректности                  | Обязателен |
+| Explainer                 | Генерация trace                        | Обязателен |
+
+---
+
+## 8. Требования к реализации (MVP)
+
+**MUST:**
+1. Детерминированный вывод при полном контексте.
+2. Поддержка defeasible reasoning (с исключениями).
+3. Полный traceable trace каждого шага.
+4. Интеграция только через Event Bus.
+5. Оценка Normative Alignment (сравнение с эталонным решением эксперта).
+6. Использование сущностей, созданных через NormFactory (NKS-002).
+
+**SHOULD:**
+- Поддержка объяснимости на естественном языке.
+- Кэширование часто используемых выводов.
+
+---
+
+## 9. Интерфейс
+
+```python
+class InferenceEngine(ABC):
+    async def infer(self, query: NormQuery, fact: NormFact, context: NormContext) -> NormDecision: ...
+```
+
+Все вызовы происходят через события.
+
+---
+
+## 10. Соответствие предыдущим документам
+
+- Полностью соответствует **NKS-000** (Reproducibility, Explainability, Event-Driven).
+- Зависит от **NKS-001** (события) и **NKS-002** (входные сущности).
+- Реализует центральный процесс нормативно-формализованной лингвистики (Глава 13 монографии).
+
+---
+
+## 11. Тестируемость
+
+Каждое требование **MUST** иметь тесты в серии **NTS**, включая golden tests на воспроизводимость и сравнение с экспертными решениями.
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes |
+|---------|------------|--------|
+| 0.1     | 12.07.2026 | Первая версия |
+
+---
+
+Документ готов к ревью.
+
+---
+
+

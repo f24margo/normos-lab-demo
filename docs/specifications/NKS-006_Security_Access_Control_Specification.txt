@@ -1,0 +1,114 @@
+### NKS-006: Security & Access Control Specification
+
+```markdown
+# NKS-006
+# Security & Access Control Specification
+
+**Document ID:** NKS-006  
+**Title:** Security & Access Control Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 13 июля 2026  
+**Category:** Core Architecture  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution  
+- **NKS-001** Event System  
+- **NKS-005** Storage & Persistence Layer  
+
+---
+
+## 1. Преамбула
+
+Настоящий документ определяет модель безопасности и контроля доступа в NormOS в соответствии с принципами Конституции.
+
+Безопасность — это не надстройка, а **фундаментальное свойство** нормативной реальности.
+
+---
+
+## 2. Назначение
+
+Security Layer обеспечивает:
+- Аутентификацию и авторизацию субъектов.
+- Контроль полномочий на выполнение нормативных действий (POW).
+- Защиту целостности событий и данных.
+- Аудит всех действий.
+
+---
+
+## 3. Архитектурные императивы (NKS-000)
+
+- **Event-Driven First** — все действия по безопасности фиксируются как события.
+- **Immutability** — права и роли не изменяются "на лету".
+- **Reproducibility** — состояние прав можно воспроизвести из истории событий.
+- **Least Privilege** — минимальные необходимые права.
+
+---
+
+## 4. Основные концепции
+
+### 4.1. Agent (Субъект)
+- Пользователь, система, агент, роль.
+
+### 4.2. Role & Permission
+- Роли (`Rada`, `Head`, `Secretary`, `Citizen`).
+- Разрешения (`can_create_norm`, `can_vote`, `can_sign_decision`).
+
+### 4.3. Normative Power (POW)
+- Специальный тип права, который позволяет изменять нормативную систему.
+
+---
+
+## 5. Основные события безопасности
+
+- `UserAuthenticated`
+- `RoleGranted`
+- `PermissionChecked`
+- `AccessDenied`
+- `SecurityEvent`
+
+---
+
+## 6. Требования к MVP
+
+**MUST:**
+1. Простая модель `Agent` + `Role` + `Permission`.
+2. Проверка прав перед выполнением критических действий (Inference, Runtime).
+3. Все проверки полномочий логируются как события.
+4. Интеграция с Event Bus.
+
+**SHOULD:**
+- Поддержка JWT / Session tokens.
+- Простая RBAC (Role-Based Access Control).
+
+---
+
+## 7. Пример проверки
+
+```python
+def check_permission(agent: Agent, action: str, context: NormContext) -> bool:
+    # Проверка через NormGene полномочий
+    pass
+```
+
+---
+
+## 8. Соответствие Конституции
+
+- Обеспечивает **нормативную целостность**.
+- Поддерживает принцип **воспроизводимости** прав и состояний.
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes |
+|---------|------------|--------|
+| 0.1     | 13.07.2026 | Первая версия |
+
+---
+
+Готово.
+
+---

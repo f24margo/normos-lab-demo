@@ -1,0 +1,121 @@
+### NKS-005: Storage & Persistence Layer Specification
+
+```markdown
+# NKS-005
+# Storage & Persistence Layer Specification
+
+**Document ID:** NKS-005  
+**Title:** Storage & Event Store Specification  
+**Version:** 0.1  
+**Status:** Draft  
+**Date:** 13 июля 2026  
+**Category:** Core Architecture  
+**Priority:** Mandatory  
+
+**Ссылки**  
+- **NKS-000** NormOS Kernel Constitution  
+- **NKS-001** Event System Specification (обязательно)  
+- **NKS-003** Inference Engine  
+- **NKS-004** NormGraph, NormContext and Runtime  
+
+---
+
+## 1. Преамбула
+
+Настоящий документ определяет слой хранения и персистентности NormOS в соответствии с принципами **Immutability**, **Reproducibility** и **Event-Driven First** (NKS-000).
+
+Event Store является **единственным источником правды** (Single Source of Truth) для всей истории нормативной реальности.
+
+---
+
+## 2. Назначение
+
+Storage Layer отвечает за:
+- Постоянное хранение всех `NormEvent` (Append-only).
+- Воспроизведение состояния системы (Replay).
+- Хранение `NormGene`, `NormFact`, `NormGraph` snapshots.
+- Поддержку аудита и трассировки.
+
+---
+
+## 3. Архитектурные императивы
+
+- **Append-Only** — события никогда не удаляются и не изменяются.
+- **Event Sourcing** — текущее состояние восстанавливается только из последовательности событий.
+- **Reproducibility** — `replay(from_event_id)` должен давать идентичное состояние.
+- **Immutability** — все сохранённые данные неизменяемы после записи.
+
+---
+
+## 4. Основные компоненты
+
+### 4.1. Event Store
+- Основное хранилище всех событий.
+- Реализация: SQLite (MVP) → PostgreSQL / EventStoreDB (production).
+
+### 4.2. Repository Pattern
+- Абстракция над хранилищем.
+- Методы: `save(event)`, `get_by_id()`, `get_by_type()`, `get_stream()`.
+
+### 4.3. Snapshotting (опционально на следующих этапах)
+- Периодическое сохранение состояний NormGraph / NormContext для ускорения Replay.
+
+---
+
+## 5. Структура хранения (MVP)
+
+**Таблица `events`**:
+- `id` (UUID, PK)
+- `type` (string)
+- `timestamp` (datetime)
+- `source` (string)
+- `payload` (JSON)
+- `metadata` (JSON)
+- `correlation_id` (UUID)
+
+---
+
+## 6. Основные события, связанные с хранением
+
+- `EventStored`
+- `EventStreamReplayed`
+- `SnapshotCreated`
+
+---
+
+## 7. Требования к MVP
+
+**MUST:**
+1. SQLite Event Store с append-only записью.
+2. Поддержка `publish → save` в EventBus.
+3. Метод `replay(from_id=None)` для восстановления состояния.
+4. Индексация по `type` и `timestamp`.
+5. Полная интеграция с NKS-001 (EventBus).
+
+**SHOULD:**
+- Простой CLI для просмотра событий (`normos events list`).
+
+---
+
+## 8. Интерфейс
+
+```python
+class EventStore(ABC):
+    def save(self, event: NormEvent) -> None: ...
+    def get(self, event_id: UUID) -> Optional[NormEvent]: ...
+    def get_stream(self, from_id: Optional[UUID] = None) -> List[NormEvent]: ...
+    def replay(self, from_id: Optional[UUID] = None) -> None: ...
+```
+
+---
+
+**История изменений**
+
+| Version | Date       | Changes |
+|---------|------------|--------|
+| 0.1     | 13.07.2026 | Первая версия |
+
+---
+
+Готово.
+

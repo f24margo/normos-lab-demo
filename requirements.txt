@@ -1,0 +1,9 @@
+jupyterlab
+pydantic
+networkx
+matplotlib
+pandas
+rich
+ipywidgets
+spacy
+pymorphy3

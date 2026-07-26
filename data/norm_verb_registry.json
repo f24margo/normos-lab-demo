@@ -1,0 +1,283 @@
+{
+  "version": "1.2",
+  "last_updated": "2026-07-25",
+  "total_verbs": 24,
+  "verbs": {
+    "підписати": {
+      "verb_id": "verb-sign-001",
+      "base_form": "підписати",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [
+        "рішення прийнято"
+      ],
+      "post_state": "рішення набрало чинності",
+      "consequences": [
+        "обов'язок виконання"
+      ],
+      "frequency": 45,
+      "status": "draft"
+    },
+    "затвердити": {
+      "verb_id": "verb-approve-001",
+      "base_form": "затвердити",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [
+        "проект підготовлено"
+      ],
+      "post_state": "норма набула чинності",
+      "consequences": [],
+      "frequency": 38,
+      "status": "draft"
+    },
+    "делегувати": {
+      "verb_id": "verb-delegate-001",
+      "base_form": "делегувати",
+      "modality": "POW",
+      "transition_type": "delegate",
+      "pre_condition": [
+        "повноваження існують"
+      ],
+      "post_state": "повноваження передані",
+      "consequences": [],
+      "frequency": 22,
+      "status": "draft"
+    },
+    "зобов'язати": {
+      "verb_id": "verb-obligate-001",
+      "base_form": "зобов'язати",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "обов'язок встановлено",
+      "consequences": [],
+      "frequency": 30,
+      "status": "draft"
+    },
+    "забороняти": {
+      "verb_id": "verb-prohibit-001",
+      "base_form": "забороняти",
+      "modality": "PROH",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "дія заборонена",
+      "consequences": [],
+      "frequency": 15,
+      "status": "draft"
+    },
+    "голосувати": {
+      "verb_id": "verb-vote-001",
+      "base_form": "голосувати",
+      "modality": "PERM",
+      "transition_type": "state_change",
+      "pre_condition": [
+        "кворум є"
+      ],
+      "post_state": "голосування проведено",
+      "consequences": [],
+      "frequency": 25,
+      "status": "draft"
+    },
+    "призначати": {
+      "verb_id": "verb-appoint-001",
+      "base_form": "призначати",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [],
+      "post_state": "новий статус створено",
+      "consequences": [],
+      "frequency": 18,
+      "status": "draft"
+    },
+    "скасовувати": {
+      "verb_id": "verb-cancel-001",
+      "base_form": "скасовувати",
+      "modality": "POW",
+      "transition_type": "terminate",
+      "pre_condition": [],
+      "post_state": "норма скасована",
+      "consequences": [],
+      "frequency": 12,
+      "status": "draft"
+    },
+    "ухвалювати": {
+      "verb_id": "verb-adopt-001",
+      "base_form": "ухвалювати",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [
+        "кворум є"
+      ],
+      "post_state": "рішення ухвалено",
+      "consequences": [],
+      "frequency": 28,
+      "status": "draft"
+    },
+    "звітувати": {
+      "verb_id": "verb-report-001",
+      "base_form": "звітувати",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "звіт надано",
+      "consequences": [],
+      "frequency": 20,
+      "status": "draft"
+    },
+    "розглянути": {
+      "verb_id": "verb-consider-001",
+      "base_form": "розглянути",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "питання розглянуто",
+      "consequences": [],
+      "frequency": 35,
+      "status": "draft"
+    },
+    "створювати": {
+      "verb_id": "verb-create-001",
+      "base_form": "створювати",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [],
+      "post_state": "новий об'єкт створено",
+      "consequences": [],
+      "frequency": 15,
+      "status": "draft"
+    },
+    "проводити": {
+      "verb_id": "verb-conduct-001",
+      "base_form": "проводити",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "дія проведена",
+      "consequences": [],
+      "frequency": 40,
+      "status": "draft"
+    },
+    "приймати": {
+      "verb_id": "verb-accept-001",
+      "base_form": "приймати",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "рішення прийнято",
+      "consequences": [],
+      "frequency": 32,
+      "status": "draft"
+    },
+    "надавати": {
+      "verb_id": "verb-provide-001",
+      "base_form": "надавати",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [],
+      "post_state": "право/послуга надано",
+      "consequences": [],
+      "frequency": 27,
+      "status": "draft"
+    },
+    "контролювати": {
+      "verb_id": "verb-control-001",
+      "base_form": "контролювати",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "контроль здійснено",
+      "consequences": [],
+      "frequency": 19,
+      "status": "draft"
+    },
+    "відкликати": {
+      "verb_id": "verb-revoke-001",
+      "base_form": "відкликати",
+      "modality": "POW",
+      "transition_type": "terminate",
+      "pre_condition": [],
+      "post_state": "повноваження відкликано",
+      "consequences": [],
+      "frequency": 11,
+      "status": "draft"
+    },
+    "ініціювати": {
+      "verb_id": "verb-initiate-001",
+      "base_form": "ініціювати",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [],
+      "post_state": "процес ініційовано",
+      "consequences": [],
+      "frequency": 14,
+      "status": "draft"
+    },
+    "забезпечити": {
+      "verb_id": "verb-ensure-001",
+      "base_form": "забезпечити",
+      "modality": "OBL",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "забезпечено",
+      "consequences": [],
+      "frequency": 33,
+      "status": "draft"
+    },
+    "уповноважувати": {
+      "verb_id": "verb-authorize-001",
+      "base_form": "уповноважувати",
+      "modality": "POW",
+      "transition_type": "create",
+      "pre_condition": [],
+      "post_state": "повноваження надано",
+      "consequences": [],
+      "frequency": 9,
+      "status": "draft"
+    },
+    "відкривати": {
+      "verb_id": "verb-open-001",
+      "base_form": "відкривати",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "засідання відкрито",
+      "consequences": [],
+      "frequency": 10,
+      "status": "draft"
+    },
+    "вести": {
+      "verb_id": "verb-lead-001",
+      "base_form": "вести",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "засідання ведеться",
+      "consequences": [],
+      "frequency": 8,
+      "status": "draft"
+    },
+    "закривати": {
+      "verb_id": "verb-close-001",
+      "base_form": "закривати",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "засідання закрито",
+      "consequences": [],
+      "frequency": 9,
+      "status": "draft"
+    },
+    "скликати": {
+      "verb_id": "verb-convene-001",
+      "base_form": "скликати",
+      "modality": "POW",
+      "transition_type": "state_change",
+      "pre_condition": [],
+      "post_state": "сесію скликано",
+      "consequences": [],
+      "frequency": 14,
+      "status": "draft"
+    }
+  }
+}
