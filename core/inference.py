@@ -11,8 +11,10 @@ class InferenceEngine:
         
         trace = [
             TraceStep(
-                stage="norm_matching",
-                details=f"Matched {len(cards)} card(s) for verb='{verb}', agent='{agent}'"
+                label=f"Norm Matching for '{verb}' ({agent})",
+                matched_verb=verb,
+                modality="matching",
+                step_type="norm_matching"
             )
         ]
         
