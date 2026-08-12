@@ -142,5 +142,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N32", matched_ids)
 
+
+    def test_regulatory_plan_matching(self):
+        # Перевірка сопоставлення N33 (планування регуляторної діяльності)
+        cards, warnings = self.matcher.match("затверджувати план діяльності з підготовки проектів регуляторних актів", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N33", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
