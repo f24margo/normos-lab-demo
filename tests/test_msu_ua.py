@@ -44,5 +44,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N18", matched_ids)
 
+
+    def test_single_tax_matching(self):
+        # Перевірка сопоставлення N19 (єдиний податок)
+        cards, warnings = self.matcher.match("встановлювати ставки єдиного податку", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N19", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()

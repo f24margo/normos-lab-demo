@@ -22,7 +22,8 @@
     "sources/lanmisto_land_communal.json",
     "sources/tax_code_art265_amendments_2013.json",
     "sources/buklib_communal_land_mgmt.json",
-    "sources/tax_code_art268.json"
+    "sources/tax_code_art268.json",
+    "sources/tax_code_art293.json"
   ],
-  "cards_count": 18
+  "cards_count": 19
 }
