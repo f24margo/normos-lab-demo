@@ -86,5 +86,19 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N24", matched_ids)
 
+
+    def test_communal_property_matching(self):
+        # Перевірка сопоставлення N25 (комунальна власність)
+        cards, warnings = self.matcher.match("засновувати комунальні підприємства", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N25", matched_ids)
+
+
+    def test_small_privatization_matching(self):
+        # Перевірка сопоставлення N26 (мала приватизація комунального майна)
+        cards, warnings = self.matcher.match("затверджувати переліки об’єктів приватизації", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N26", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
