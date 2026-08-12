@@ -32,7 +32,11 @@
     "sources/logu_art60.json",
     "sources/privatization_code_art11.json",
     "sources/blagoustroy_art34.json",
-    "sources/jhk_code_art10.json"
+    "sources/jhk_code_art10.json",
+    "sources/admin_services_art12.json",
+    "sources/logu_art34.json",
+    "sources/civil_defense_code_art19.json",
+    "sources/logu_art38.json"
   ],
-  "cards_count": 28
+  "cards_count": 32
 }

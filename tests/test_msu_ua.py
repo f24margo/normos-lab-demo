@@ -114,5 +114,33 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N28", matched_ids)
 
+
+    def test_cnap_matching(self):
+        # Перевірка сопоставлення N29 (утворення ЦНАП)
+        cards, warnings = self.matcher.match("утворювати центр надання адміністративних послуг", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N29", matched_ids)
+
+
+    def test_social_protection_matching(self):
+        # Перевірка сопоставлення N30 (соціальний захист)
+        cards, warnings = self.matcher.match("забезпечувати надання соціальних послуг", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N30", matched_ids)
+
+
+    def test_civil_protection_matching(self):
+        # Перевірка сопоставлення N31 (цивільний захист)
+        cards, warnings = self.matcher.match("забезпечувати цивільний захист", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N31", matched_ids)
+
+
+    def test_public_order_matching(self):
+        # Перевірка сопоставлення N32 (забезпечення громадського порядку)
+        cards, warnings = self.matcher.match("забезпечувати громадський порядок", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N32", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
