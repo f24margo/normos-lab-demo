@@ -177,5 +177,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N37", matched_ids)
 
+
+    def test_road_maintenance_matching(self):
+        # Перевірка сопоставлення N38 (утримання автомобільних доріг)
+        cards, warnings = self.matcher.match("забезпечувати утримання автомобільних доріг", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N38", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
