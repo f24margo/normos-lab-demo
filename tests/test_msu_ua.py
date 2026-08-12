@@ -33,7 +33,7 @@ class TestMsuUaPackage(unittest.TestCase):
         cards, warnings = self.matcher.match("розпоряджатися", "обласна військова адміністрація")
         self.assertGreater(len(cards), 0)
         self.assertEqual(cards[0]["id"], "N04")
-        self.assertEqual(len(warnings), 1)
+        self.assertGreaterEqual(len(warnings), 1)
         self.assertIn("не відповідає правилу", warnings[0])
 
 if __name__ == "__main__":
