@@ -37,5 +37,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_land_ids = [c["id"] for c in cards_land]
         self.assertIn("N17", matched_land_ids)
 
+
+    def test_tourist_tax_matching(self):
+        # Перевірка сопоставлення N18 (туристичний збір)
+        cards, warnings = self.matcher.match("встановлювати туристичний збір", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N18", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
