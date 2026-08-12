@@ -1,9 +1,12 @@
 {
   "name": "msu_ua",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Пакет нормативних правил та карток NKS-013 для місцевого самоврядування України",
   "sources": [
-    "sources/law_msu.json"
+    "sources/law_msu.json",
+    "sources/constitution_msu.json",
+    "sources/law_position_va_msu.json",
+    "sources/nads_explanation.json"
   ],
-  "cards_count": 5
+  "cards_count": 8
 }
