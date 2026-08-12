@@ -7,3 +7,4 @@ rich
 ipywidgets
 spacy
 pymorphy3
+git+https://github.com/f24margo/normos-lab-demo.git
