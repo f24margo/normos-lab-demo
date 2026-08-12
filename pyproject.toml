@@ -11,3 +11,7 @@ dependencies = [
     "spacy",
     "pymorphy3",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["core*", "packages*"]
