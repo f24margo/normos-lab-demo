@@ -42,7 +42,11 @@
     "sources/logu_art32.json",
     "sources/health_code_art16.json",
     "sources/transport_code_art6.json",
-    "sources/logu_art31.json"
+    "sources/logu_art31.json",
+    "sources/zku_art188.json",
+    "sources/zku_art12.json",
+    "sources/ecology_code_art15.json",
+    "sources/logu_art30.json"
   ],
-  "cards_count": 38
+  "cards_count": 42
 }

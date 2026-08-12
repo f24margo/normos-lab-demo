@@ -184,5 +184,33 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N38", matched_ids)
 
+
+    def test_land_control_matching(self):
+        # Перевірка сопоставлення N39 (земельний контроль)
+        cards, warnings = self.matcher.match("здійснювати самоврядний контроль за використанням земель", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N39", matched_ids)
+
+
+    def test_land_redemption_matching(self):
+        # Перевірка сопоставлення N40 (викуп земель для суспільних потреб)
+        cards, warnings = self.matcher.match("приймати рішення про викуп земельних ділянок для суспільних потреб", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N40", matched_ids)
+
+
+    def test_ecology_matching(self):
+        # Перевірка сопоставлення N41 (екологія та фонди довкілля)
+        cards, warnings = self.matcher.match("затверджувати місцеві екологічні програми", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N41", matched_ids)
+
+
+    def test_trade_and_services_matching(self):
+        # Перевірка сопоставлення N42 (торгівля та побутове обслуговування)
+        cards, warnings = self.matcher.match("установлювати режим роботи підприємств торгівлі та громадського харчування", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N42", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
