@@ -23,7 +23,8 @@
     "sources/tax_code_art265_amendments_2013.json",
     "sources/buklib_communal_land_mgmt.json",
     "sources/tax_code_art268.json",
-    "sources/tax_code_art293.json"
+    "sources/tax_code_art293.json",
+    "sources/land_code_art124.json"
   ],
-  "cards_count": 19
+  "cards_count": 20
 }

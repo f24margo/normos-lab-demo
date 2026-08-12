@@ -51,5 +51,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N19", matched_ids)
 
+
+    def test_land_lease_matching(self):
+        # Перевірка сопоставлення N20 (оренда землі)
+        cards, warnings = self.matcher.match("передавати земельні ділянки в оренду", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N20", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
