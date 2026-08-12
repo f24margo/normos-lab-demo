@@ -25,7 +25,10 @@
     "sources/tax_code_art268.json",
     "sources/tax_code_art293.json",
     "sources/land_code_art124.json",
-    "sources/land_code_art118.json"
+    "sources/land_code_art118.json",
+    "sources/urban_code_art16_17.json",
+    "sources/urban_code_art19.json",
+    "sources/urban_code_art29.json"
   ],
-  "cards_count": 21
+  "cards_count": 24
 }

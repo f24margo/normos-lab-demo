@@ -65,5 +65,26 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N21", matched_ids)
 
+
+    def test_general_plan_matching(self):
+        # Перевірка сопоставлення N22 (генеральний план)
+        cards, warnings = self.matcher.match("затверджувати генеральний план", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N22", matched_ids)
+
+
+    def test_dpt_matching(self):
+        # Перевірка сопоставлення N23 (детальний план території)
+        cards, warnings = self.matcher.match("затверджувати детальний план території", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N23", matched_ids)
+
+
+    def test_mbuo_matching(self):
+        # Перевірка сопоставлення N24 (містобудівні умови та обмеження)
+        cards, warnings = self.matcher.match("надавати містобудівні умови та обмеження", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N24", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
