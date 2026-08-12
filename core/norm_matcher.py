@@ -16,7 +16,7 @@ class NormMatcher:
                 cards.append(json.load(f))
         return cards
 
-    def match(self, verb: str, agent: str) -> Tuple[List[Dict[str, Any]], List[str]]:
+    def match(self, verb: str, agent: str, limit: int = 10) -> Tuple[List[Dict[str, Any]], List[str]]:
         matched = []
         warnings = []
 
@@ -35,6 +35,6 @@ class NormMatcher:
 
         # Приоритет совпадения по агенту
         matched.sort(key=lambda x: (not x[1], x[0]['id']))
-        final_cards = [c[0] for c in matched[:2]] # Лимит 2 карточки
+        final_cards = [c[0] for c in matched[:limit]]
 
         return final_cards, warnings

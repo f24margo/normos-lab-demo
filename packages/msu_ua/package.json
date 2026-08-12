@@ -13,7 +13,15 @@
     "sources/law_msu.json",
     "sources/constitution_msu.json",
     "sources/law_position_va_msu.json",
-    "sources/nads_explanation.json"
+    "sources/nads_explanation.json",
+    "sources/dps_land_tax_rates.json",
+    "sources/tax_code_art265.json",
+    "sources/local_taxes_structure.json",
+    "sources/land_code_art83.json",
+    "sources/wikilegalaid_land_ownership.json",
+    "sources/lanmisto_land_communal.json",
+    "sources/tax_code_art265_amendments_2013.json",
+    "sources/buklib_communal_land_mgmt.json"
   ],
-  "cards_count": 14
+  "cards_count": 17
 }

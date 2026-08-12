@@ -24,5 +24,18 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N12", matched_ids)
 
+
+    def test_land_and_property_tax_matching(self):
+        # Перевірка сопоставлення N15 та N16 (земельний податок та нерухомість)
+        cards_tax, _ = self.matcher.match("встановлювати ставки", "сільські, селищні, міські ради")
+        matched_tax_ids = [c["id"] for c in cards_tax]
+        self.assertIn("N15", matched_tax_ids)
+        self.assertIn("N16", matched_tax_ids)
+
+        # Перевірка сопоставлення N17 (розпорядження землями)
+        cards_land, _ = self.matcher.match("розпоряджатися землями", "територіальні громади")
+        matched_land_ids = [c["id"] for c in cards_land]
+        self.assertIn("N17", matched_land_ids)
+
 if __name__ == "__main__":
     unittest.main()
