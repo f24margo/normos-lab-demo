@@ -46,7 +46,11 @@
     "sources/zku_art188.json",
     "sources/zku_art12.json",
     "sources/ecology_code_art15.json",
-    "sources/logu_art30.json"
+    "sources/logu_art30.json",
+    "sources/logu_art36.json",
+    "sources/logu_art27.json",
+    "sources/logu_art28.json",
+    "sources/logu_art29.json"
   ],
-  "cards_count": 46
+  "cards_count": 51
 }

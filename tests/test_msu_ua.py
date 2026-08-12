@@ -233,5 +233,40 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N46", matched_ids)
 
+
+    def test_law_and_order_matching(self):
+        # Перевірка сопоставлення N47 (законність та правопорядок)
+        cards, warnings = self.matcher.match("здійснювати заходи щодо забезпечення законності та правопорядку", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N47", matched_ids)
+
+
+    def test_housing_and_communal_services_matching(self):
+        # Перевірка сопоставлення N48 (житлово-комунальне господарство)
+        cards, warnings = self.matcher.match("управляти об’єктами житлово-комунального господарства", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N48", matched_ids)
+
+
+    def test_socio_economic_development_matching(self):
+        # Перевірка сопоставлення N49 (соціально-економічний розвиток)
+        cards, warnings = self.matcher.match("розробляти програми соціально-економічного та культурного розвитку", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N49", matched_ids)
+
+
+    def test_municipal_property_matching(self):
+        # Перевірка сопоставлення N50 (комунальна власність)
+        cards, warnings = self.matcher.match("управляти майном, що належить до комунальної власності громади", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N50", matched_ids)
+
+
+    def test_budget_and_finance_matching(self):
+        # Перевірка сопоставлення N51 (бюджет та фінанси)
+        cards, warnings = self.matcher.match("складати проект місцевого бюджету", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N51", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
