@@ -39,7 +39,9 @@
     "sources/logu_art38.json",
     "sources/regulatory_code_art7.json",
     "sources/education_code_art66.json",
-    "sources/logu_art32.json"
+    "sources/logu_art32.json",
+    "sources/health_code_art16.json",
+    "sources/transport_code_art6.json"
   ],
-  "cards_count": 35
+  "cards_count": 37
 }
