@@ -37,7 +37,9 @@
     "sources/logu_art34.json",
     "sources/civil_defense_code_art19.json",
     "sources/logu_art38.json",
-    "sources/regulatory_code_art7.json"
+    "sources/regulatory_code_art7.json",
+    "sources/education_code_art66.json",
+    "sources/logu_art32.json"
   ],
-  "cards_count": 33
+  "cards_count": 35
 }

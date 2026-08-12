@@ -149,5 +149,19 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N33", matched_ids)
 
+
+    def test_education_matching(self):
+        # Перевірка сопоставлення N34 (заклади освіти)
+        cards, warnings = self.matcher.match("засновувати заклади освіти", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N34", matched_ids)
+
+
+    def test_culture_and_sports_matching(self):
+        # Перевірка сопоставлення N35 (культура та спорт)
+        cards, warnings = self.matcher.match("управляти закладами культури", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N35", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
