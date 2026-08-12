@@ -24,7 +24,8 @@
     "sources/buklib_communal_land_mgmt.json",
     "sources/tax_code_art268.json",
     "sources/tax_code_art293.json",
-    "sources/land_code_art124.json"
+    "sources/land_code_art124.json",
+    "sources/land_code_art118.json"
   ],
-  "cards_count": 20
+  "cards_count": 21
 }

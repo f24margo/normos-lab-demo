@@ -58,5 +58,12 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N20", matched_ids)
 
+
+    def test_land_privatization_matching(self):
+        # Перевірка сопоставлення N21 (безоплатна приватизація землі)
+        cards, warnings = self.matcher.match("передавати безоплатно у власність", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N21", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
