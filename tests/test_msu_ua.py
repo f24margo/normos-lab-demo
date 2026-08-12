@@ -100,5 +100,19 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N26", matched_ids)
 
+
+    def test_blagoustroy_matching(self):
+        # Перевірка сопоставлення N27 (правила благоустрою)
+        cards, warnings = self.matcher.match("затверджувати правила благоустрою", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N27", matched_ids)
+
+
+    def test_jhk_tariffs_matching(self):
+        # Перевірка сопоставлення N28 (тарифи на комунальні послуги)
+        cards, warnings = self.matcher.match("встановлювати тарифи на комунальні послуги", "виконавчі органи сільських, селищних, міських рад")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N28", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()

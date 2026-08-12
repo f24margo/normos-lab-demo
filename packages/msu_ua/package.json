@@ -30,7 +30,9 @@
     "sources/urban_code_art19.json",
     "sources/urban_code_art29.json",
     "sources/logu_art60.json",
-    "sources/privatization_code_art11.json"
+    "sources/privatization_code_art11.json",
+    "sources/blagoustroy_art34.json",
+    "sources/jhk_code_art10.json"
   ],
-  "cards_count": 26
+  "cards_count": 28
 }
