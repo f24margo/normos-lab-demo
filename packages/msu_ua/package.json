@@ -1,12 +1,19 @@
 {
   "name": "msu_ua",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Пакет нормативних правил та карток NKS-013 для місцевого самоврядування України",
   "sources": [
+    "sources/law_service_oms.json",
+    "sources/land_rights_tg.json",
+    "sources/kharkiv_oblrada_msu.json",
+    "sources/law_vca.json",
+    "sources/law_martial_state_art4.json",
+    "sources/budget_code_ua.json",
+    "sources/tax_code_ua.json",
     "sources/law_msu.json",
     "sources/constitution_msu.json",
     "sources/law_position_va_msu.json",
     "sources/nads_explanation.json"
   ],
-  "cards_count": 8
+  "cards_count": 14
 }

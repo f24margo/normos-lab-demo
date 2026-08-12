@@ -19,5 +19,10 @@ class TestMsuUaPackage(unittest.TestCase):
         matched_ids = [c["id"] for c in cards]
         self.assertIn("N05", matched_ids)
 
+    def test_budget_and_tax_matching(self):
+        cards, warnings = self.matcher.match("затверджувати бюджет", "сільські, селищні, міські ради")
+        matched_ids = [c["id"] for c in cards]
+        self.assertIn("N12", matched_ids)
+
 if __name__ == "__main__":
     unittest.main()
